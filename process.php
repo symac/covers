@@ -15,7 +15,7 @@
     # https://github.com/hackathonBnF/hackathon2016/wiki/API-Couverture-Service
 
 
-$records = $sru->all('bib.fuzzyIsbn adj "978-2-246-81933-2"');
+$records = $sru->all('bib.fuzzyIsbn adj "2413003967"');
     # $records = $sru->all('alma.title="Hello world"');
     foreach ($records as $record) {
         $ark = $record->data->xpath('./child::*')[0]->attr("id");
