@@ -4,7 +4,12 @@
     "require": {
         "php": "^7.2.5",
         "ext-ctype": "*",
+        "ext-gd": "^7.2",
         "ext-iconv": "*",
+        "http-interop/http-factory-guzzle": "^1.0",
+        "illuminate/support": "^7.7",
+        "php-http/guzzle6-adapter": "^2.0",
+        "scriptotek/sru-client": "^0.7.0",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "5.0.*",
         "symfony/console": "5.0.*",
@@ -27,12 +32,7 @@
         "symfony/twig-pack": "*",
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
-        "symfony/yaml": "5.0.*",
-        "scriptotek/sru-client": "^0.7.0",
-        "php-http/guzzle6-adapter": "^2.0",
-        "http-interop/http-factory-guzzle": "^1.0",
-        "ext-gd": "^7.2"
-
+        "symfony/yaml": "5.0.*"
     },
     "require-dev": {
         "symfony/debug-pack": "*",

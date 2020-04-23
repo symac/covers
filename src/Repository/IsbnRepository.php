@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Isbn;
+use App\Service\IsbnLibrary;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,9 +15,29 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class IsbnRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $isbnLibrary;
+    public function __construct(ManagerRegistry $registry, IsbnLibrary $isbnLibrary)
     {
+        $this->isbnLibrary = $isbnLibrary;
         parent::__construct($registry, Isbn::class);
+    }
+
+    public function findByValue(string $isbn) {
+        $isbn = $this->isbnLibrary->clean($isbn);
+        $result = $this->createQueryBuilder("i");
+        if (strlen($isbn) == 10) {
+            $result = $result->where("i.value10 = :isbn");
+        } elseif (strlen($isbn) == 13) {
+            $result = $result->where("i.value13 = :isbn");
+        } else {
+            return null;
+        }
+        $result = $result->setParameter("isbn", $isbn)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $result;
+
     }
 
     // /**
