@@ -6,6 +6,8 @@
         "ext-ctype": "*",
         "ext-gd": "^7.2",
         "ext-iconv": "*",
+        "biblys/isbn": "^2.1.4",
+        "fale/isbn": "^3.1",
         "http-interop/http-factory-guzzle": "^1.0",
         "illuminate/support": "^7.7",
         "php-http/guzzle6-adapter": "^2.0",

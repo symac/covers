@@ -1,4 +1,7 @@
 {
+    "biblys/isbn": {
+        "version": "2.1.4"
+    },
     "clue/stream-filter": {
         "version": "v1.4.1"
     },
@@ -83,6 +86,9 @@
     },
     "egulias/email-validator": {
         "version": "2.1.17"
+    },
+    "fale/isbn": {
+        "version": "3.1.0"
     },
     "guzzlehttp/guzzle": {
         "version": "6.5.3"

@@ -15,15 +15,14 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class IsbnRepository extends ServiceEntityRepository
 {
-    private $isbnLibrary;
-    public function __construct(ManagerRegistry $registry, IsbnLibrary $isbnLibrary)
+    public function __construct(ManagerRegistry $registry)
     {
-        $this->isbnLibrary = $isbnLibrary;
         parent::__construct($registry, Isbn::class);
     }
 
     public function findByValue(string $isbn) {
-        $isbn = $this->isbnLibrary->clean($isbn);
+
+        $isbn = preg_replace("#[^\dX]#", "", strtoupper($isbn));
         $result = $this->createQueryBuilder("i");
         if (strlen($isbn) == 10) {
             $result = $result->where("i.value10 = :isbn");
@@ -34,10 +33,12 @@ class IsbnRepository extends ServiceEntityRepository
         }
         $result = $result->setParameter("isbn", $isbn)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getResult();
 
-        return $result;
-
+        if ( (is_array($result)) && (sizeof($result) > 0) ){
+            return $result[0];
+        }
+        return null;
     }
 
     // /**

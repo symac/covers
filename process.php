@@ -24,7 +24,9 @@ $records = $sru->all('bib.fuzzyIsbn adj "2413003967"');
         $x = imagesx($coverBnf );
         $y = imagesy($coverBnf );
 
-        $im = imagecreatetruecolor($x, $y + 200);
+        $heightCopyright = 100;
+
+        $im = imagecreatetruecolor($x, $y + $heightCopyright);
         imagecopymerge($im, $coverBnf, 0, 0, 0, 0, $x, $y, 100);
 
         $copyright = imagecreatetruecolor($x, 200);
@@ -32,7 +34,7 @@ $records = $sru->all('bib.fuzzyIsbn adj "2413003967"');
         $black = imagecolorallocate($im, 0x00, 0x00, 0x00);
         $font_file = './arial.ttf';
 
-        imagefilledrectangle($copyright, 0, 0, $x, 200, $white);
+        imagefilledrectangle($copyright, 0, 0, $x, $heightCopyright, $white);
         imagefttext($copyright, 13, 0, 105, 55, $black, $font_file, 'Source : BnF');
         imagecopymerge($im, $copyright, 0, $y, 0, 0, $x, $y, 100);
 
