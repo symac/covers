@@ -13,17 +13,23 @@
         est spécifique à la BnF. L'applicatif proposé ici se propose de faire une passerelle avec un identifiant plus
         standard, l'ISBN.</p>
 
-    <h2>Légalité</h2>
-    <p>La question du droit d'auteur sur les couvertures de livres est un sujet longuement débattu et n'a pas vocation à
-        être tranchée ici. La BnF propose depuis janvier 2014 la mise à disposition sous licence ouverte des notices
-        produites par l'institution, on peut donc penser que la BnF ne revendique pas de droit particulier sur
-        l'utilisation de ces
-        images. Le service proposé ici ajoute en bas des couvertures une mention indiquant l'origine de l'image.</p>
-
-    <p>L'API étant par ailleurs librement décrite pas la BnF on peut penser que son utilisation serait autorisée par
-        l'établissement mais rien n'étant explicitement indiqué sur le site de l'institution depuis ce hackathon de
-        2016, un établissement qui souhaiterait utiliser ce projet dans un cadre institutionnel est bien entendu invité
-        à se rapprocher de la BnF.</p>
+    <h2>La question des jaquettes dans les catalogues de bibliothèque</h2>
+    <p>L'enrichissement des catalogues de bibliothèques par l'utilisation de couvertures d'ouvrages est une question qui
+        se pose de longue date, plusieurs offres existent, qu'elles soient payantes (Electre, Zebris, ...) ou gratuites
+        avec contrepartie (Amazon, Google Books). </p>
+    <p>Aucune offre publique n'a (à ma connaissance) jamais vu le jour, et ce qui s'en rapproche le plus à l'heure
+        actuelle est l'API que la BnF <a
+                href="https://github.com/hackathonBnF/hackathon2016/wiki/API-Couverture-Service">décrit sur Github</a>.
+    </p>
+    <p>Si la BnF décrit cette API sur Github, je n'ai pas réussi à trouver
+        d'information officielle de la BnF concernant la possibilité offerte à une bibliothèque de l'utiliser
+        pour enrichir son propre catalogue.</p>
+    <p>Depuis janvier 2014 la BnF met à disposition sous licence ouverte les notices qu'elle produit, mais rien n'est
+        dit pour ces images. Si la BnF n'est bien entendu pas titulaire des droits d'auteur sur ces illustrations,
+        dispose-t-elle d'une autorisation de distribution, ce point n'est pas précisé.</p>
+    <p>Le service proposé ici ajoute en bas des couvertures une mention indiquant l'origine de l'image et propose une
+        preuve de concept, mais pour une mise en oeuvre en situation réelle, il conviendrait bien entendu de préciser
+        cet aspect légal.</p>
 
     <h2>Preuve de concept</h2>
     <p>
@@ -44,8 +50,8 @@
         <li>gestion d'appels multiples synchronisés;</li>
     </ul></p>
     <h2>Utilisation</h2>
-    <p>Le code disponible sur Github est installé sur ce serveur pour test, mais n'a bien entendu pas vocation à être
-        utilisé en production. Voici cependant quelques exemples sur la manière de l'utiliser.</p>
+    <p>Le code <a href="https://github.com/symac/covers">disponible sur Github</a> est installé sur ce serveur pour en
+        valider le principe fonctionnel.</p>
 
     <p>L'url de base pour appeler l'API est la suivante
         : <br/>{{ url("ajax_single", {"isbn": '_isbn_', "size": "_size_"}) }}</p>
@@ -76,4 +82,6 @@
     <p>Si besoin de me contacter vous trouverez mon adresse sur <a href="http://www.geobib.fr/contact">cette page</a>,
         vous pouvez aussi me trouver <a href="https://www.twitter.com/symac">sur twitter</a>
     </p>
+    <p>Page mise en ligne le 26 avril 2020 par Sylvain Machefert.</p>
+
 {% endblock %}
