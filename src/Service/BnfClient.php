@@ -13,8 +13,6 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class BnfClient
 {
-    private $isbnLibrary;
-
     private $sizes = [
         "small" => [
             "copyrightHeight" => 36,
@@ -29,11 +27,6 @@ class BnfClient
             "fontSize" => 16,
         ]
     ];
-
-    public function __construct(IsbnLibrary $isbnLibrary)
-    {
-        $this->isbnLibrary = $isbnLibrary;
-    }
 
     public function getArkFromIsbn(Isbn $isbn)
     {
