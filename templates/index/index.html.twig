@@ -4,6 +4,26 @@
 
 {% block body %}
     <h1>Couvertures de livres - API BnF</h1>
+
+    <h2>Mise à jour suite à publication</h2>
+    <p>À la suite de la publication de cette page, Aude Le Moullec-Rieu qui travaille à la diffusion des données aux
+        communautés professionnelles à la BnF a posté <a
+                href="https://twitter.com/aude_lmr/status/1254720661685178368">le tweet suivant</a> : </p>
+
+    <p style="text-align: center">
+        <a
+                href="https://twitter.com/aude_lmr/status/1254720661685178368">
+            <img style="border:1px solid #444; border-radius: 0.5em; text-align: center" src="{{ asset("tweet.png") }}"
+                 alt="Ce qui est décrit dans le github est l'API utilisée par les applis de la BnF pour récupérer les couvertures. Une version publique de cette API est prévue pour 2021 : nouveaux critères de recherche, accessible dans une console swagger avec la nouvelle version du portail"
+                 title="Ce qui est décrit dans le github est l'API utilisée par les applis de la BnF pour récupérer les couvertures. Une version publique de cette API est prévue pour 2021 : nouveaux critères de recherche, accessible dans une console swagger avec la nouvelle version du portail"/>
+        </a>
+    </p>
+    <p>
+        Dès 2021 la BnF proposera donc un service du type de celui décrit ci-dessous, très bonne nouvelle donc. Je
+        laisse en ligne cette page dans le cas où elle pourrait intéresser quelqu'un sur le principe (mise en place d'un
+        proxy Symfony faisant appel à un serveur SRU puis récupérant des images et ajoutant un bandeau sur l'origine du
+        document à l'image), mais la preuve de concept décrite ci-dessous n'a plus vraiment lieu d'être !
+    </p>
     <h2>Contexte</h2>
     <p>En 2016, à l'occasion de l'organisation d'un hackathon, la BnF a <a
                 href="https://github.com/hackathonBnF/hackathon2016/wiki/API-Couverture-Service">mis en ligne</a> une
@@ -39,35 +59,38 @@
     <p>Cette application est développée en PHP/mysql sur la base du framework Symfony. Cette preuve de concept
         implémente les fonctionnalités suivantes :
     <ul>
-    <li>Recherche par ISBN10/13 (via l'interrogation du <a href="http://api.bnf.fr/api-sru-catalogue-general">serveur SRU de la BnF</a> pour récupérer un ark);</li>
+        <li>Recherche par ISBN10/13 (via l'interrogation du <a href="http://api.bnf.fr/api-sru-catalogue-general">serveur
+                SRU de la BnF</a> pour récupérer un ark);
+        </li>
         <li>Mise en cache des images;</li>
         <li>Ajout d'un filigrane indiquant la source;</li>
     </ul>
 
-    <p>Plusieurs fonctionnalités seraient à revoir dans le cadre d'une mise en oeuvre réelle de l'outil :
+    <p>Plusieurs fonctionnalités seraient à revoir dans le cadre d'une mise en oeuvre réelle de l'outil :</p>
     <ul>
         <li>meilleur gestion des cas d'erreur;</li>
         <li>gestion d'appels multiples synchronisés;</li>
-    </ul></p>
+    </ul>
     <h2>Utilisation</h2>
     <p>Le code <a href="https://github.com/symac/covers">disponible sur Github</a> est installé sur ce serveur pour en
         valider le principe fonctionnel.</p>
 
     <p>L'url de base pour appeler l'API est la suivante
         : <br/>{{ url("ajax_single", {"isbn": '_isbn_', "size": "_size_"}) }}</p>
-    <p>_size_ peut prendre l'une des valeurs suivantes :
+    <p>_size_ peut prendre l'une des valeurs suivantes :</p>
     <ul>
         <li>small : image de {{ constant('App\\Entity\\Cover::WIDTH_SMALL') }} pixels de large</li>
         <li>medium : image de {{ constant('App\\Entity\\Cover::WIDTH_MEDIUM') }} pixels de large</li>
         <li>large : image de {{ constant('App\\Entity\\Cover::WIDTH_LARGE') }} pixels de large</li>
-    </ul></p>
+    </ul>
     <h2>Exemple</h2>
-    <p>Exemple de l'appel pour l'image
-    <pre><a href="{{ url("ajax_single", {isbn: "978-2-36279-267-0", size: "small"}) }}">{{ url("ajax_single", {isbn: "978-2-36279-267-0", size: "small"}) }}</a></pre></p>
-    <img alt="couverture de l'ouvrave 978-2-36279-267-0"
-         src="{{ url("ajax_single", {isbn: "978-2-36279-267-0", size: "small"}) }}"/>
+    <p>Exemple de l'appel pour l'image</p>
+    <pre><a href="{{ url("ajax_single", {isbn: "978-2-36279-267-0", size: "small"}) }}">{{ url("ajax_single", {isbn: "978-2-36279-267-0", size: "small"}) }}</a></pre>
     <p>
-        Voir la même image :
+        <img alt="couverture de l'ouvrave 978-2-36279-267-0"
+             src="{{ url("ajax_single", {isbn: "978-2-36279-267-0", size: "small"}) }}"/></p>
+    <p>
+        Voir la même image :</p>
     <ul>
         <li>en medium : <a
                     href="{{ url("ajax_single", {isbn: "978-2-36279-267-0", size: "medium"}) }}">{{ url("ajax_single", {isbn: "978-2-36279-267-0", size: "medium"}) }}</a>
@@ -76,7 +99,6 @@
                     href="{{ url("ajax_single", {isbn: "978-2-36279-267-0", size: "large"}) }}">{{ url("ajax_single", {isbn: "978-2-36279-267-0", size: "large"}) }}</a>
         </li>
     </ul>
-    </p>
 
     <h2>Informations complémentaires</h2>
     <p>Si besoin de me contacter vous trouverez mon adresse sur <a href="http://www.geobib.fr/contact">cette page</a>,
