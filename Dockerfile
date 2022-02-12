@@ -1,10 +1,16 @@
 FROM php:7.4.25-apache
 
-RUN docker-php-ext-install pdo pdo_mysql
 
 RUN apt-get update && \
-   apt-get install -y unzip git
+   apt-get install -y unzip git zlib1g-dev libpng-dev libjpeg-dev 
 # wget libarchive-tools vim unzip imagemagick poppler-utils
+
+RUN docker-php-ext-install pdo pdo_mysql
+
+RUN docker-php-ext-configure gd --with-jpeg --with-freetype
+
+# Only then install it
+RUN docker-php-ext-install gd
 
 EXPOSE 80
 RUN a2enmod rewrite
